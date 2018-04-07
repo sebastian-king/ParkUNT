@@ -57,93 +57,22 @@ void setup() {
   // signal the end of the calibration period
   digitalWrite(13, LOW);
   
-  /*if(Ethernet.begin(mac)==0)
-  {
-    Serial.println("Falled to configure Ethenet using DHCP");
-    Ethernet.begin(mac,ip);
-  }
-  delay(1000);
-  Serial.println("Connecting . . . ");
   
-  //http://parkunt.tech/api.php?spot-id=1&available=1
-  
-  //if you get a connection report back via serial
-  if(client.connect(server,80))
-  {
-    Serial.println("connected!");
-    //Make a HTTP request
-    client.println("GET /api.php?spot-id=1&available=1");
-    client.println("Host: www.parkunt.tech");
-    client.println("Connection: close");
-    client.println();
-  }
-  else {
-    Serial.println("Connection Failed:(");
-  }*/
 }
 
 void loop() {
   for(int i=0; i<numSpots; i++){
     // read the sensor:
     sensorValue[i] = analogRead(photos[i]);
-    
-  
-    // apply the calibration to the sensor reading
-    //sensorValue[i] = map(sensorValue[i], sensorMin[i], sensorMax[i], 0, 255);
-    
-    // in case the sensor value is outside the range seen during calibration
-    //sensorValue[i] = constrain(sensorValue[i], 0, 255);
-    
+   
     // fade the LED using the calibrated value:
     analogWrite(ledPin[i], sensorValue[i]);
     
     Serial.print(sensorValue[i]);
-    Serial.print("\t");
+    Serial.print("-");
   }
   Serial.println();
-  delay(1000);
+  delay(200);
   
-  /*for(int i=0;i<numSpots;i++)
-  {
-    if(sensorValue[i]>200)
-    {
-      spotAvailable[i]=true;
-    }
-    else
-    {
-      spotAvailable[i]=false;
-    }
-    if(client.connect(server,80))
-    {
-      Serial.println("connected!");
-      //Make a HTTP request
-      String message="GET /api.php?spot-id=";
-      message.concat(String(i));
-      message.concat("&available=");
-      if(spotAvailable[i])
-      {
-        message.concat(String(1));
-      }
-      else
-      {
-        message.concat(String(0));
-      }
-      client.println("Host: www.parkunt.tech");
-      client.println("Connection: close");
-      client.println();
-    }
-    else 
-    {
-      Serial.println("Connection Failed:(");
-    }
-  }
-  if (!client.connected()) 
-  {
-    Serial.println();
-    Serial.println("disconnecting.");
-    client.stop();
-
-    // do nothing forevermore:
-    while (true);
-  }*/
+  
 }	

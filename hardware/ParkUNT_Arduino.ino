@@ -29,7 +29,7 @@ bool spotAvailable[numSpots]={false,false,false,false,false,false};
 
 void setup() {
   
-  Serial.begin(9600); //Start Serial
+  Serial.begin(19200); //Start Serial
   
   
   // turn on LED to signal the start of the calibration period:
@@ -57,7 +57,7 @@ void setup() {
   // signal the end of the calibration period
   digitalWrite(13, LOW);
   
-  if(Ethernet.begin(mac)==0)
+  /*if(Ethernet.begin(mac)==0)
   {
     Serial.println("Falled to configure Ethenet using DHCP");
     Ethernet.begin(mac,ip);
@@ -79,7 +79,7 @@ void setup() {
   }
   else {
     Serial.println("Connection Failed:(");
-  }
+  }*/
 }
 
 void loop() {
@@ -101,8 +101,9 @@ void loop() {
     Serial.print("\t");
   }
   Serial.println();
+  delay(1000);
   
-  for(int i=0;i<numSpots;i++)
+  /*for(int i=0;i<numSpots;i++)
   {
     if(sensorValue[i]>200)
     {
@@ -144,5 +145,5 @@ void loop() {
 
     // do nothing forevermore:
     while (true);
-  }
+  }*/
 }	

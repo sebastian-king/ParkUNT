@@ -41,6 +41,8 @@ namespace ParkUNTConsole
         private SerialPort _serialPort;
         private WebSocket ws;
 
+        private bool[] availability = { true, true, true, true, true, true, true };
+
         /// <summary>
         /// Evaluates the availability of a spot based upon sensor values
         /// </summary>
@@ -49,17 +51,21 @@ namespace ParkUNTConsole
 
         public void EvaluateInputs(String str)
         {
-            string[] stringArray = str.Split('\t');
+            string[] stringArray = str.Split('-');
             for (int i = 0; i < stringArray.Length; i++)
             {
                 Int32.TryParse(stringArray[i], out int output);
 
-                StringBuilder stringBuilder = new StringBuilder("{ \"key\": \"update\", \"values\": { \"spot\": ").Append(i + 1).Append(", \"available\": ").Append(EvaluateAvailability(output) ? 1 : 0).Append(" } }");
+                if (EvaluateAvailability(output) != this.availability[i])
+                {
+                    this.availability[i] = !this.availability[i];
+                    StringBuilder stringBuilder = new StringBuilder("{ \"key\": \"update\", \"values\": { \"spot\": ").Append(i + 1).Append(", \"available\": ").Append(this.availability[i]?1:0).Append(" } }");
 
-
-                if (this.ws.IsAlive) {
-                    this.ws.Send(stringBuilder.ToString());
+                    if (this.ws.IsAlive) {
+                        this.ws.Send(stringBuilder.ToString());
+                    }
                 }
+
             }
 
             

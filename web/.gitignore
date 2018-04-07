@@ -1,0 +1,5 @@
+config.php
+websocket/node_modules/
+websocket/wss-sv/log/supervise
+websocket/wss-sv/supervise
+other

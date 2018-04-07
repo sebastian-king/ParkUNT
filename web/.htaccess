@@ -2,11 +2,13 @@ Options -Indexes
 
 RewriteEngine On
 
-RewriteCond %{HTTP_HOST} !^www\.parkunt\.tech [NC]
-RewriteRule (.*) https://www.parkunt.tech/$1 [L,R=301]
+RewriteRule ^api.php - [L]
 
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteCond %{HTTP_HOST} !^www\.parkunt\.tech [NC]
+#RewriteRule (.*) https://www.parkunt.tech/$1 [L,R=301]
+
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{DOCUMENT_ROOT}/$1.php -f
 RewriteRule ^(([^/]+/)*[^.]+)$ /$1.php [L]

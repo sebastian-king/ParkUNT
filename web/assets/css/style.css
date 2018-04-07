@@ -1,0 +1,161 @@
+/*
+ * Name: Halfy - Responsive Pricing Tables        
+ * Author: web-master72		    
+*/
+
+body {
+ font-family: 'Bitter', serif;
+ background: #f5f5f5;
+ background-image: url('../images/bg.jpg');
+ background-size: cover;
+ padding-bottom: 40px;
+}
+
+h2 {
+	font-size: 50px;
+    color: green;
+    text-shadow: 2px -2px white;
+}
+
+.pricing-tables-jumbotron {
+	text-align: center;
+	background: none;
+}
+
+.pricing-tables-jumbotron>h1, .pricing-tables-jumbotron>h2 {
+	font-family: 'Bitter', serif;
+}
+
+.plan {
+	background: #fff;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	padding: 20px;
+	margin: 20px 0;
+	text-align: center;
+}
+
+.plan>.plan-title>h3, .plan>.plan-price>h3, .plan>.plan-price>h4 {
+	font-family: 'Bitter', serif;
+	font-weight: bold;
+	font-size: 32px;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+.plan>.plan-title>span, .plan>.plan-price>h4 {
+	font-weight: normal;
+	font-style: italic;
+	font-size: 16px;
+	text-transform: none;
+}
+
+.plan>.plan-title {
+	padding: 40px 20px 40px;
+}
+
+.plan>.plan-price>h3 {
+	font-size: 72px;
+}
+
+.plan>.plan-price>h3>span {
+	font-size: 32px;
+	vertical-align: top;
+	position: relative;
+	margin: 12px 0 0 -7px;
+	display: inline-block;
+}
+
+.plan.available>.plan-list {
+	background: #0f6b1a;
+}
+
+.plan.unavailable>.plan-list {
+	background: #a01414;
+}
+.plan .directions {
+	visibility: hidden;
+}
+.plan.available .directions {
+	visibility: visible;
+}
+
+.plan>.plan-list {
+	background: #222;
+	margin: 0 -20px -20px;
+	padding: 0 20px 20px;
+	color: #fff;
+}
+
+.plan-list>.divide {
+	position: relative;
+}
+
+.plan-list>.divide>.icon {
+	background: #fff;
+	border-radius: 0 0 6px 6px;
+	color: #222;
+	padding: 5px 0;
+	width: 69px;
+	position: absolute;
+	left: 50%;
+	top: -1px;
+	margin-left: -34px;
+}
+
+.plan-list>.item-list {
+	list-style: none;
+	padding: 80px 0 20px 0;
+}
+
+.plan-list>.item-list>li {
+	padding: 5px;
+	font-size: 16px;
+}
+
+.plan-list>.btn {
+	font-family: 'Bitter', serif;
+	font-weight: bold;
+	font-size: 16px;
+	text-transform: uppercase;
+	width: 100%;
+	padding: 12px 8px;
+}
+
+.attached>.col-md-4, .attached>.col-md-3 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.attached .plan {
+	margin-top: 8px;
+}
+
+.attached .most-popular {
+	position: relative;
+	z-index: 99;
+	margin-top: -8px;
+}
+
+.attached .most-popular>.plan-price {
+	padding-bottom: 43px;
+}
+
+.attached .most-popular>.plan-price>h3 {
+	font-size: 84px;
+}
+
+.attached .most-popular>.plan-price>h3>span {
+	font-size: 42px;
+	margin: 12px 0 0 -7px;
+}
+
+.attached .most-popular>.plan-list>.item-list {
+	padding-bottom: 35px;
+}
+
+@media (max-width: 768px) {
+	.attached>.col-md-4, .attached>.col-md-3 {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}

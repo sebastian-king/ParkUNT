@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "${DIR}";
+
 while [ true ]; do
 	get_number=`wget https://www.parkunt.tech/api.php?get_available -qO-`
 	if [ "${number}" != "${get_number}" ]; then

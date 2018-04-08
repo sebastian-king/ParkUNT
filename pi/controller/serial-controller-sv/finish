@@ -1,4 +1,4 @@
 #!/bin/bash
 
 #tmp
-killall python
+killall arduino-interface-ports.sh

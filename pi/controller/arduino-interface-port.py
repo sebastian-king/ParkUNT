@@ -29,11 +29,11 @@ while True:
 	if (len(value) > 0):
 		if (int(value) > 300 and (spot == 1 or second_loop)):
 			spot = 0
-			print "SET AVAIL FOR spot %d TO 1" % (index)
+			print "SET AVAIL FOR spot %s TO 1" % str(index)
 			ws.send('{"key": "update", "values": {"spot": ' + str(index) + ',"available": 1}}');
 		elif (int(value) <= 300 and (spot == 0 or second_loop)):
 			spot = 1
-			print "SET AVAIL FOR spot %d TO 0" % (index)
+			print "SET AVAIL FOR spot %s TO 0" % str(index)
 			ws.send('{"key": "update", "values": {"spot": ' + str(index) + ',"available": 0}}');
 	if (first_loop == False):
 		second_loop = False

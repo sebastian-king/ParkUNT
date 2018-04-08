@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#tmp
+killall arduino-interface-port.sh

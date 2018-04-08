@@ -1,2 +1,2 @@
 #!/bin/bash
-python /home/parkunt/pi/main/arduino-interface.py
+/home/parkunt/pi/main/arduino-interface.py

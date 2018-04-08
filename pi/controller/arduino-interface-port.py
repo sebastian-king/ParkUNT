@@ -33,11 +33,11 @@ while True:
 	value = read_ser.rstrip();
 	#print value;
 	if (len(value) > 0):
-		if (int(value) > 375 and (spot == 1 or second_loop)):
+		if (int(value) > 225 and (spot == 1 or second_loop)):
 			spot = 0
 			print "SET AVAIL FOR spot %s TO 1" % str(index)
 			ws.send('{"key": "update", "values": {"spot": ' + str(index) + ',"available": 1}}');
-		elif (int(value) <= 375 and (spot == 0 or second_loop)):
+		elif (int(value) <= 225 and (spot == 0 or second_loop)):
 			spot = 1
 			print "SET AVAIL FOR spot %s TO 0" % str(index)
 			ws.send('{"key": "update", "values": {"spot": ' + str(index) + ',"available": 0}}');

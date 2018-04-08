@@ -18,4 +18,11 @@ if (isset($_GET['spot-id']) && isset($_GET['available'])) {
 		$q->execute();
 		$q->close();
 	}
+} else if (isset($_GET['get_available'])) {
+	require("config.php");
+	$db = new mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE);
+	$q = $db->query("SELECT count(id) FROM spot_availability WHERE available = 1");
+	if ($q->num_rows > 0) {
+		echo $q->fetch_row()[0];
+	}
 }

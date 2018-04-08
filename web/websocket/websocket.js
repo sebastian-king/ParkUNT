@@ -18,9 +18,6 @@ var mysql_host = config.toString().match(/define\("MYSQL_HOST", "(.+)"\);/)[1];
 var mysql_database = config.toString().match(/define\("MYSQL_DATABASE", "(.+)"\);/)[1];
 var listen_address = config.toString().match(/define\("WEBSOCKET_LISTEN_ADDRESS", "(.+)"\);/)[1];
 
-var clients = [];
-var connectionIDCounter = 0;
-
 var con = mysql.createConnection({
   host: mysql_host,
   user: mysql_user,
@@ -48,6 +45,8 @@ con.connect(function(err) {
 			console.log((new Date()) + ' Server is listening on port 443');
 		});
 
+		var clients = [];
+		var connectionIDCounter = 0;
 		wsServer = new WebSocketServer({
 			httpServer: server,
 			autoAcceptConnections: false
@@ -69,9 +68,9 @@ con.connect(function(err) {
 			connection.id = connectionIDCounter++;
 			clients.push(connection);
 
-			console.log((new Date()) + ' Connection accepted.');
+			console.log((new Date()) + ' Connection accepted (#' + connection.id + ').');
 
-			connection.sendUTF(JSON.stringify("Hello"));
+			connection.sendUTF(JSON.stringify("Hello #" + connection.id));
 			
 			con.query("SELECT * FROM spot_availability", function (err, result, fields) { // update the user on connect/reconnect
 				if (err) throw err;
@@ -98,10 +97,15 @@ con.connect(function(err) {
 								var update_object = { "key": "update", values: [[received.values.spot, received.values.available]]};
 								clients.forEach(function(client) {
 									if (client != connection) {
+										console.log("Broadcast message to", client.id);
 										client.sendUTF(JSON.stringify(update_object));
+									} else {
+										console.log("Broadcasted from", client.id);
 									}
 								});
 							}
+						} else if (received.key == "echo") {
+							connection.sendUTF(JSON.stringify("echo test to #" + connection.id));
 						}
 						console.log(received);
 
@@ -117,8 +121,16 @@ con.connect(function(err) {
 			});
 
 			connection.on('close', function(reasonCode, description) {
-				clients = clients.splice(clients.indexOf(connection), 1);
-				console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+				console.log("BEFORE");
+				clients.forEach(function(client) {
+					console.log(client.id);
+				});
+				clients.splice(clients.indexOf(connection), 1);
+				console.log("AFTER");
+				clients.forEach(function(client) {
+					console.log(client.id);
+				});
+				console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' (#' + connection.id + ') disconnected.');
 			});
 		});
 	

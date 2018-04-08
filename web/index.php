@@ -37,14 +37,18 @@
 		<div class="jumbotron pricing-tables-jumbotron">
 		  	<h2>UNT Discovery Park - Parking Availability</h2>
 		  	<h3>Available Spots: <span id="available-spots">0</span></h3>
+			<button type="button" class="btn btn-success" onClick="javascript:take_me_to_available_spot();">Take Me to an Available Spot</button>
 		</div>
 
 		<div class="row attached">
 			
 			<?php
-			foreach ($availability as $spot => $available) {
+			$i;
+			for ($i = 1; $i <= 5; $i++) {
+				$spot = $i;
+				$availability = $availability[$i];
 			?>
-			<div id="spot-<?php echo $spot; ?>" class="col-sm-2 col-md-2">
+			<div id="spot-<?php echo $spot; ?>" class="col-sm-2 col-md-2 <?php if ($i == 1) { echo 'col-lg-offset-1'; } ?>">
 				<div class="plan <?php if ($available) { echo 'available'; } else { echo 'unavailable'; } ?>">
 					<div class="plan-title">
 						<h3>Spot #<?php echo $spot; ?></h3>
@@ -66,7 +70,40 @@
 			</div>
 			<?php
 			}
-			?>			
+			?>
+
+		</div>
+		
+		<div class="row attached">
+			
+			<?php
+			for ($i = 6; $i <= 10; $i++) {
+				$spot = $i;
+				$availability = $availability[$i];
+			?>
+			<div id="spot-<?php echo $spot; ?>" class="col-sm-2 col-md-2 <?php if ($i == 6) { echo 'col-lg-offset-1'; } ?>">
+				<div class="plan <?php if ($available) { echo 'available'; } else { echo 'unavailable'; } ?>">
+					<div class="plan-title">
+						<h3>Spot #<?php echo $spot; ?></h3>
+						<span>UNT DISCOVERY PARK</span>
+					</div>
+					<div class="plan-list">
+						<div class="divide">
+							<div class="icon">
+								<i class="fa fa-<?php if ($available) { echo 'check'; } else { echo 'times'; } ?> fa-3x"></i>
+							</div>
+						</div>
+						<ul class="item-list status">
+                   			<li>CURRENTLY</li>
+	                   		<li><strong><?php if ($available) { echo 'AVAILABLE'; } else { echo 'UNAVAILABLE'; } ?></strong></li>
+	              		</ul>
+	              		<a href="https://www.google.com/maps/search/<?php echo urlencode($plus_code[$spot]); ?>?z=20" class="btn btn-success directions">Directions</a>
+              		</div>
+				</div>
+			</div>
+			<?php
+			}
+			?>
 
 		</div>
 		
@@ -96,6 +133,16 @@
 	
 	<script src="/assets/js/ReconnectingWebsocket.js"></script>
 	<script language="javascript" type="text/javascript">
+		
+		function take_me_to_available_spot() {
+			var href = $(".plan.available").first().find('.directions');
+			if (href.length) {
+				window.location.href = href.attr('href');
+			} else {
+				alert('There are currently not available spots, sorry.');
+			}
+		}
+		
 		var ws_url = "wss://websocket.parkunt.tech";
 		var errors = 0;
 		function init() {
@@ -133,11 +180,11 @@
 						$this = $("#spot-" + received.values[i][0] + " > .plan");
 						if (received.values[i][1] == "1") {
 							$this.addClass("available").removeClass("unavailable");
-							$this.find("div.icon > i").removeClass("fa-question").addClass("fa-check");
+							$this.find("div.icon > i").removeClass("fa-times").addClass("fa-check");
 							$this.find(".status > li:last-child > strong").text("AVAILABLE");
 						} else {
 							$this.addClass("unavailable").removeClass("available");
-							$this.find("div.icon > i").removeClass("fa-question").addClass("fa-times");
+							$this.find("div.icon > i").removeClass("fa-check").addClass("fa-times");
 							$this.find(".status > li:last-child > strong").text("UNAVAILABLE");
 						}
 						

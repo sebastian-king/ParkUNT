@@ -9,10 +9,24 @@ font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
 number_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",50)
 img=Image.new("RGBA", (200,200),(0,0,0))
 draw = ImageDraw.Draw(img)
+
+
 if (sys.argv[1] == "0"):
-	draw.text((25, 50),sys.argv[1],(255,0,0),font=number_font)
+	r=255
+	g=0
+	b=0
 else:
-	draw.text((25, 50),sys.argv[1],(0,255,0),font=number_font)
+	r=0
+	g=255
+	b=0
+
+draw.text((25, 50),sys.argv[1],(r,g,b),font=number_font)
+
+spot_text = "spots"
+if (sys.argv[1] == "1"):
+	spot_text = "spot"
+
+
 draw.text((75, 50),"spots",(255,255,255),font=font)
 draw.text((5, 100),"available",(255,255,255),font=font)
 #draw.chord((100, 75, 125, 100), 0, 360, fill='green')

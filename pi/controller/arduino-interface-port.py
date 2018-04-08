@@ -7,9 +7,9 @@ from websocket import create_connection
 
 import sys
 
-#dir_path = os.path.dirname(os.path.realpath(__file__))
-#serial_device=subprocess.check_output([dir_path + '/available_serial_port.sh', ''])
-serial_device=sys.argv[1];
+dir_path = os.path.dirname(os.path.realpath(__file__))
+serial_device=subprocess.check_output([dir_path + '/../main/available_serial_port.sh', ''])
+#serial_device=sys.argv[1];
 
 ser=serial.Serial(serial_device, 19200)  #change ACM number as found from ls /dev/tty/ACM*
 ser.baudrate=19200

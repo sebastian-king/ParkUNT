@@ -1,2 +1,2 @@
 #!/bin/bash
-#/home/parkunt/pi/main/arduino-interface-port.sh
+/home/parkunt/pi/controller/arduino-interface-port.sh NULL 10

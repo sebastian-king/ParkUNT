@@ -1,2 +1,4 @@
-serial-sv/log/supervise
-serial-sv/supervise
+main/serial-sv/log/supervise
+main/serial-sv/supervise
+controller/serial-sv-controller/log/supervise
+controller/serial-sv-controller/supervise

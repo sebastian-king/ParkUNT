@@ -30,34 +30,6 @@ bool spotAvailable[numSpots]={false,false,false,false,false,false};
 void setup() {
   
   Serial.begin(19200); //Start Serial
-  
-  
-  // turn on LED to signal the start of the calibration period:
-  pinMode(13, OUTPUT);
-  digitalWrite(13, HIGH);
-
-
-
-  // calibrate during the first five seconds
-  for(int i =0; i<numSpots;i++){
-    while (millis() < 5000) {
-      sensorValue[i] = analogRead(photos[i]);
-  
-      // record the maximum sensor value
-      if (sensorValue[i] > sensorMax[i]) {
-        sensorMax[i] = sensorValue[i];
-      }
-  
-      // record the minimum sensor value
-      if (sensorValue[i] < sensorMin[i]) {
-        sensorMin[i] = sensorValue[i];
-      }
-    }
-  }
-  // signal the end of the calibration period
-  digitalWrite(13, LOW);
-  
-  
 }
 
 void loop() {

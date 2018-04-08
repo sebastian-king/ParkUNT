@@ -4,14 +4,21 @@ ParkUNT is my HackUNT 2018 project. A demonstration of sensor-based car park man
 Dependencies & install procedure:
 
 ```
+mkdir -p /home/parkunt/
+cd /home/parkunt/
+git clone https://github.com/sebastian-king/ParkUNT.git .
+```
+
+```
 sudo apt-get install python-serial
 sudo pip install websocket-client
 ```
 
 ```
-@reboot         /home/parkunt/pi/dyn-pi-main.sh
-*/30 * * * *    /home/parkunt/pi/dyn-pi-main.sh
-@reboot         runsvdir /etc/service/
+echo "@reboot         /home/parkunt/pi/dyn-pi-main.sh" > /tmp/cron
+echo "*/30 * * * *    /home/parkunt/pi/dyn-pi-main.sh" >> /tmp/cron
+echo "@reboot         runsvdir /etc/service/" >> /tmp/cron
+crontab /tmp/cron
 ```
 
 ```

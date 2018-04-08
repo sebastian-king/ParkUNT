@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.IO.Ports;
-using System.Net;
 using System.Text.RegularExpressions;
 using WebSocketSharp;
 
-namespace ParkUNTConsole
+
+namespace ParkUNTSingleArduino
 {
-    class Program
+    class SingleSensorProgram
     {
         static void Main(string[] args)
         {
-            var comreader = new ArduinoSerialReader("COM5");
+            ListComPorts();
+            var comreader = new ArduinoSerialReader("COM7");
 
             Console.ReadLine();
         }
@@ -38,10 +39,11 @@ namespace ParkUNTConsole
 
     public class ArduinoSerialReader : IDisposable
     {
+        private int spot = 7;
         private SerialPort _serialPort;
         private WebSocket ws;
 
-        private bool[] availability = { true, true, true, true, true, true, true };
+        private bool availability = true;
 
         /// <summary>
         /// Evaluates the availability of a spot based upon sensor values
@@ -51,24 +53,24 @@ namespace ParkUNTConsole
 
         public void EvaluateInputs(String str)
         {
-            string[] stringArray = str.Split('-');
-            for (int i = 0; i < stringArray.Length; i++)
+            string stringArray = str;
+
+            Int32.TryParse(stringArray, out int output);
+
+            if (EvaluateAvailability(output) != this.availability)
             {
-                Int32.TryParse(stringArray[i], out int output);
+                this.availability = !this.availability;
+                StringBuilder stringBuilder = new StringBuilder("{ \"key\": \"update\", \"values\": { \"spot\": ").Append(this.spot).Append(", \"available\": ").Append(this.availability ? 1 : 0).Append(" } }");
 
-                if (EvaluateAvailability(output) != this.availability[i])
+                if (this.ws.IsAlive)
                 {
-                    this.availability[i] = !this.availability[i];
-                    StringBuilder stringBuilder = new StringBuilder("{ \"key\": \"update\", \"values\": { \"spot\": ").Append(i + 1).Append(", \"available\": ").Append(this.availability[i]?1:0).Append(" } }");
-
-                    if (this.ws.IsAlive) {
-                        this.ws.Send(stringBuilder.ToString());
-                    }
+                    this.ws.Send(stringBuilder.ToString());
                 }
-
             }
 
-            
+
+
+
         }
 
         public ArduinoSerialReader(string portName)
@@ -86,7 +88,7 @@ namespace ParkUNTConsole
 
         void SerialPort_DataReceived(object s, SerialDataReceivedEventArgs e)
         {
-            
+
             String str = _serialPort.ReadLine();
 
             Console.WriteLine(str);

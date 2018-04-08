@@ -1,0 +1,2 @@
+#!/bin/bash
+/home/parkunt/pi/controller/arduino-interface-port.py /dev/ttyACM3 10

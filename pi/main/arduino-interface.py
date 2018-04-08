@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import serial
 import RPi.GPIO as GPIO
 import time
@@ -26,11 +28,11 @@ while True:
 		#print(values)
 		for i in range(0, len(values)):
 			if (len(values[i]) > 0):
-				if (int(values[i]) > 300 and (spots[i] == 1 or second_loop)):
+				if (int(values[i]) > 375 and (spots[i] == 1 or second_loop)):
 					spots[i] = 0
 					print "SET AVAIL FOR spot %d TO 1" % (i+1)
 					ws.send('{"key": "update", "values": {"spot": ' + str(i+1) + ',"available": 1}}');
-				elif (int(values[i]) <= 300 and (spots[i] == 0 or second_loop)):
+				elif (int(values[i]) <= 375 and (spots[i] == 0 or second_loop)):
 					spots[i] = 1
 					print "SET AVAIL FOR spot %d TO 0" % (i+1)
 					ws.send('{"key": "update", "values": {"spot": ' + str(i+1) + ',"available": 0}}');

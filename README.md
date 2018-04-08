@@ -15,8 +15,8 @@ sudo pip install websocket-client
 ```
 
 ```
-echo "@reboot         /home/parkunt/pi/dyn-pi-main.sh" > /tmp/cron
-echo "*/30 * * * *    /home/parkunt/pi/dyn-pi-main.sh" >> /tmp/cron
+echo "@reboot         /home/parkunt/pi/main/dyn-pi-main.sh" > /tmp/cron
+echo "*/30 * * * *    /home/parkunt/pi/main/dyn-pi-main.sh" >> /tmp/cron
 echo "@reboot         runsvdir /etc/service/" >> /tmp/cron
 crontab /tmp/cron
 ```

@@ -34,12 +34,13 @@
 ?>
 <div class="container" style="width: 100%;">
 
-		<div class="jumbotron pricing-tables-jumbotron">
+		<div class="jumbotron pricing-tables-jumbotron" style="padding-bottom: 0px;">
 		  	<h2>UNT Discovery Park - Parking Availability</h2>
 		  	<h3>Available Spots: <span id="available-spots">0</span></h3>
 			<button type="button" class="btn btn-success" onClick="javascript:take_me_to_available_spot();">Take Me to an Available Spot</button>
+			<p style="margin-top: 10px;"><small>ParkUNT is a system for managing and streamlining car parking lots with high utilisation, such as on large campuses. Read more on <a href="https://github.com/sebastian-king/ParkUNT"><i class="fa fa-github"></i> GitHub</a>.</small></p>
 		</div>
-
+		<center></center>
 		<div class="row attached">
 			
 			<?php

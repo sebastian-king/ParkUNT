@@ -1,7 +1,7 @@
 *Our official HackUNT 2018 submission, write-up & media can be found on [DevPost](https://devpost.com/software/parkunt-yhm0ac).*
 
 # ParkUNT
-ParkUNT is my HackUNT 2018 project. A demonstration of sensor-based car park management.
+ParkUNT is our HackUNT 2018 project. A demonstration of sensor-based car park management.
 
 ## What is our project?
 ParkUNT is a system for managing and streamlining car parking lots with high utilisation, such as on large campuses.

@@ -1,6 +1,3 @@
-//Number of parking spots
-const int numSpots=6;
-
 // These constants won't change:
 const int photo=A0;    // pin that the sensor is attached to
 

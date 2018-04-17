@@ -1,15 +1,3 @@
-#include <SPI.h>
-#include <Ethernet2.h>
-
-//Ethernet Setup
-byte mac[]={0x90,0xA2,0xDA,0x10,0x39,0x68};
-char server[]="ParkUNT.tech";
-
-IPAddress ip(192,168,1,37);
-EthernetClient client;
-
-
-
  //Number of parking spots
  const int numSpots=6;
 
@@ -20,12 +8,6 @@ const int ledPin[numSpots] = {9,8,7,6,5,4};        // pin that the LED is attach
 
 // variables:
 int sensorValue[numSpots] = {0,0,0,0,0,0};         // the sensor value
-
-int sensorMin[numSpots] = {1023,1023,1023,1023,1023,1023};        // minimum sensor value
-int sensorMax[numSpots] = {0,0,0,0,0,0};           // maximum sensor value
-
-
-bool spotAvailable[numSpots]={false,false,false,false,false,false};
 
 void setup() {
   
